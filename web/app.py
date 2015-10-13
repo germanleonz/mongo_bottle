@@ -1,7 +1,16 @@
-from bottle import route, run, template
+import bottle
+import pymongo
 
-@route('/hello/<name>')
-def index(name):
-    return template('<b>Hello {{name}}</b>!', name=name)
+@bottle.route('/')
+def index():
+    connection = pymongo.MongoClient('mongo', 27017)
 
-run(host='0.0.0.0', port=8080)
+    db = connection.test
+
+    name = db.names
+
+    item = name.find_one()
+
+    return '<b>Hello %s!</b>' % item['first']
+
+bottle.run(host='0.0.0.0', port=8080)
