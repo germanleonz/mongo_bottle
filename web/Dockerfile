@@ -1,5 +1,7 @@
 FROM python:2.7
 ENV PYTHONUNBUFFERED 1
-ADD . /code
+RUN mkdir /code
 WORKDIR /code
+ADD requirements.txt /code/ 
 RUN pip install -r requirements.txt
+ADD . /code
