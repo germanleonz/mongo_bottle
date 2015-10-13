@@ -1,0 +1,11 @@
+web:
+    build: ./web
+    command: python app.py
+    ports:
+        - "9090:8080"
+    volumes:
+        - ./web:/code
+    links:
+        - mongo
+mongo:
+    build: ./mongo
